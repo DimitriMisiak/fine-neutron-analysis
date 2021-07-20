@@ -628,9 +628,9 @@ if __name__ == '__main__':
     plt.close('all')
     plt.rcParams['text.usetex']=True
     from tqdm import tqdm
-    debug = True
+    debug = False
 
-    analysis_dir = '/home/misiak/Analysis/neutron_background'
+    analysis_dir = '/home/misiak/Analysis/NEUTRON'
     output_dir = '/'.join([analysis_dir, 'analysis_plots'])
     extension='png'
     

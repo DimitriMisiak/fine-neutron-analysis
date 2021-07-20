@@ -18,7 +18,8 @@ def custom_bin_edges(data_array, res):
     
     return np.linspace(bmin, bmax, num)
 
-def cdf_calc(data, axis=-1):
+    
+def cdf_calc(data, axis=-1, weights=None):
     data_sorted = np.sort(data, axis=-1)
     ndim = data_sorted.shape[-1]
     cdf = (np.arange(ndim)+1) / float(ndim)

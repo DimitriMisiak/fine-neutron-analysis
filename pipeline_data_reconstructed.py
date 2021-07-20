@@ -197,7 +197,7 @@ def hdf5_processing(raw_hdf5_path, output_hdf5_path, extract_function):
 
 if __name__ == "__main__":
 
-    analysis_dir = '/home/misiak/Analysis/neutron_background'
+    analysis_dir = '/home/misiak/Analysis/NEUTRON'
         
     raw_data_path =  '/'.join([analysis_dir, 'data_raw.h5'])
     output_data_path = '/'.join([analysis_dir, 'data_reconstructed.h5'])

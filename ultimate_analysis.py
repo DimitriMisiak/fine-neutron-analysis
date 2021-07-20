@@ -509,7 +509,7 @@ for im, mode in enumerate(['Background', 'Calibration']):
         for eff_key, eff_array in eff_dict[mode][stype].items():
             line, = a.plot(
                     bins_array, eff_array,
-                    ls='steps-mid', alpha=0.3,
+                    drawstyle='steps-mid', alpha=0.3,
             )
             a.errorbar(
                     bins_array, eff_array,
@@ -639,7 +639,7 @@ for im, mode in enumerate(['Background', 'Calibration']):
                 bins_array,
                 DRU_dict[mode][stype],
                 label='{} {} [DRU]'.format(mode, stype),
-                ls='steps-mid',
+                drawstyle='steps-mid',
         )
 
         if stype == 'NR':
@@ -739,7 +739,7 @@ for i,dru_array in enumerate(array_list):
     ax.plot(
         bins_array,
         dru_array,
-        ls='steps-mid',
+        drawstyle='steps-mid',
         alpha=1,
         color=c,
         lw=3,

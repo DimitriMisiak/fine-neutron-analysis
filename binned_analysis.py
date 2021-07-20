@@ -410,7 +410,7 @@ for im, source in enumerate(source_list):
             line, = a.plot(
                 bins_array,
                 eff,
-                ls='steps-mid',
+                drawstyle='steps-mid',
                 marker='.',
                 label='fine'
             )

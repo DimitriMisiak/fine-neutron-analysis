@@ -60,7 +60,7 @@ def plot_chi2_vs_energy_pretty(title, df):
     
     num = '{}: $\chi^2$ Cut'.format(title)
     
-    fig, axes = plt.subplots(ncols=2, figsize=(12, 7),
+    fig, axes = plt.subplots(ncols=2, figsize=(6.3, 3.9),
                              num=num
     )
 
@@ -271,12 +271,12 @@ def band_cut_plots(title, df_analysis, nsigma=2):
     
     fig_band_ecei, ax_ecei = plt.subplots(
         num = '{} : band cut ecei'.format(title),
-        figsize=(10,7),
+        figsize=(6.3, 3.9),
     )
     ax_ecei.set_title('{} : band cut ecei'.format(title))
     fig_band_quenching, ax_qu = plt.subplots(
         num = '{} : band cut quenching'.format(title),
-        figsize=(10,7),
+        figsize=(6.3, 3.9),
     )
     ax_qu.set_title('{} : band cut quenching'.format(title))
     
@@ -515,7 +515,7 @@ def charge_conservation(title, df):
     
     fig, ax = plt.subplots(
         num = '{} : charge conservation'.format(title),
-        figsize=(10,7),
+        figsize=(6.3, 3.9),
     )
     
     ax.plot(
@@ -599,6 +599,8 @@ if __name__ == '__main__':
     
     plt.close('all')
     plt.rcParams['text.usetex']=True
+    plt.rcParams['font.size']=9
+    plt.rcParams['lines.linewidth']=1
     from tqdm import tqdm
     debug = True
 
@@ -625,11 +627,11 @@ if __name__ == '__main__':
     
     if debug:
         h5type_list = [
-            'simu',
+            'data',
         ]
         
         source_list = [
-            'Calibration',
+            'Background',
         ]       
 
         simulation_list = [

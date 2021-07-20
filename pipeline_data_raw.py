@@ -322,7 +322,7 @@ def simu_root_to_hdf5(root_path, save_path):
 
 if __name__ == "__main__":
     
-    output_directory = '/home/misiak/Analysis/neutron_background'
+    output_directory = '/home/misiak/Analysis/NEUTRON'
     
     # DATA root files
     data_root_directory = '/home/misiak/Data/data_run57_neutron/Data'

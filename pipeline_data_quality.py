@@ -289,7 +289,7 @@ def hdf5_analysis(fine_hdf5_path, output_hdf5_path):
 
 if __name__ == "__main__":
 
-    analysis_dir = '/home/misiak/Analysis/neutron_background'
+    analysis_dir = '/home/misiak/Analysis/NEUTRON'
     
     ### DATA
     fine_data_path = '/'.join([analysis_dir, 'data_reconstructed.h5'])

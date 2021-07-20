@@ -98,26 +98,15 @@ def fid_cuts(df):
     Create new columns with the truth array for the bulk and guard events.
     """
     nsigma = 2
-
-    sigma_dict = dict()
-    for chan in 'ABCD':
-        sig0 = df['std_energy_ion{}'.format(chan)].unique()[0]
-        sig10 = df['std_calib_energy_ion{}'.format(chan)].unique()[0]
     
-        sigma_dict[chan] = sigma_function(
-            df.energy_heat,
-            sig0,
-            sig10
-        )
-
     df['bulk_cut'] = (
-        ( abs(df['energy_ionA']) < nsigma * sigma_dict['A'] )
-        & ( abs(df['energy_ionC']) < nsigma * sigma_dict['C'] )
+        ( abs(df['energy_ionA']) < df['std_energy_ionA'] * nsigma )
+        & ( abs(df['energy_ionC']) < df['std_energy_ionC'] * nsigma )
     )
 
     df['guard_cut'] = (
-        ( abs(df['energy_ionB']) < nsigma * sigma_dict['B'] )
-        & ( abs(df['energy_ionD']) < nsigma * sigma_dict['D'] )
+        ( abs(df['energy_ionB']) < df['std_energy_ionB'] * nsigma )
+        & ( abs(df['energy_ionD']) < df['std_energy_ionD'] * nsigma )
     )
     
     return None
@@ -130,11 +119,8 @@ def band_cut(df):
     
     nsigma = 2
     
-    # sig0 = df['std_energy_heat'].unique()[0]
-    # sig10 = df['std_calib_energy_heat'].unique()[0]
-
-    sig0 = df['std_energy_ion_bulk'].unique()[0]
-    sig10 = df['std_calib_energy_ion_bulk'].unique()[0]
+    sig0 = df['std_energy_heat'].unique()[0]
+    sig10 = df['std_calib_energy_heat'].unique()[0]
     
     ei_err = nsigma * sigma_function(energy_heat, sig0, sig10)
     ei_err_baseline = nsigma * sig0
@@ -268,14 +254,14 @@ if __name__ == "__main__":
         output_data_path,
     )
     
-    ### SIMULATION
-    fine_simu_path = '/'.join([analysis_dir, 'simu_heat_calib.h5'])
-    output_simu_path = '/'.join([analysis_dir, 'simu_science.h5'])
+    # ### SIMULATION
+    # fine_simu_path = '/'.join([analysis_dir, 'simu_heat_calib.h5'])
+    # output_simu_path = '/'.join([analysis_dir, 'simu_science.h5'])
     
-    hdf5_science(
-        fine_simu_path,
-        fine_data_path,
-        fine_noise_path,
-        output_simu_path,
-    )
+    # hdf5_science(
+    #     fine_simu_path,
+    #     fine_data_path,
+    #     fine_noise_path,
+    #     output_simu_path,
+    # )
     

@@ -1,0 +1,19 @@
+for the fine analysis of the ROOT file from NEPAL.
+
+Launch in this order:
+
+1)batch_pipeline_data_raw.py (Very Long)
+2)batch_pipeline_data_reconstructed.py (Short)
+3)batch_pipeline_data_quality.py (Short)
+    --> iterative feedback on parameters with batch_graph_quality.py
+4)manual_crosstalk_correction.py to estimate the cabling capacity
+5) edit cabling capacity into batch_pipeline_xtalk.py
+    --> sanity graphs with batch_graph_xtalk.py
+4)batch_manual_ion_calib.py and use the result to edit batch_pipeline_data_ion_calib.py
+4)pipeline_data_ion_calib.py (Short)
+    --> sanity graphs with batch_graph_ion_calib.py
+5)batch_manual_10keV_selection.py, select manually the 10keV events
+6)batch_manual_heat_calib.py and use the result to edit batch_pipeline_data_heat_calib.py
+7)batch_pipeline_data_heat_calib.py
+    --> sanity graphs with batch_graph_heat_calib.py	
+8)batch_science_plots.py

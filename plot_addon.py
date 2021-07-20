@@ -87,7 +87,7 @@ def ax_hist(axis, bin_edges, data_array, lab, color='slateblue'):
     
     data_sorted, cdf_array = cdf_calc(data_array)
     
-    hist_line, = axis.plot(bin_array, data_hist, ls='steps-mid',
+    hist_line, = axis.plot(bin_array, data_hist, drawstyle='steps-mid',
                            color=c_dark)
 
     axis.fill_between(bin_array, data_hist, label=lab,
@@ -98,7 +98,7 @@ def ax_hist(axis, bin_edges, data_array, lab, color='slateblue'):
     a0.tick_params(axis='y', labelcolor='grey')
     
     cdf_line, = a0.plot(data_sorted, cdf_array,
-                        ls='steps', color=color, path_effects=style)
+                        drawstyle='steps', color=color, path_effects=style)
     
     axis.grid(True)
     axis.set_ylabel('Counts Events {}'.format(lab), color='k')
@@ -111,6 +111,60 @@ def ax_hist(axis, bin_edges, data_array, lab, color='slateblue'):
     axis.set_xlim(bin_edges[0], bin_edges[-1])
     
     return a0, bin_array, data_hist, cdf_array
+
+
+
+def ax_hist_v2(axis, bin_edges, data_array, lab=None, color='slateblue', weights=None):
+    """ Draw pretty histogramm and cdf in given axis.
+    Return ax, bin_array, hist_array, cdf_array.    
+    """
+    import matplotlib.patheffects as pe
+    
+    c_dark = lighten_color(color, 1.5)
+    c_light = lighten_color(color, 0.8)
+    
+    style = [pe.Normal(), pe.withStroke(foreground='k', linewidth='3')]
+
+    bin_array = bin_edges[1:] - (bin_edges[1]-bin_edges[0])/2
+
+    data_hist, _ = np.histogram(data_array, bins=bin_edges)
+    
+    data_sorted, cdf_array = cdf_calc(data_array, weights=weights)
+    
+    data_sorted = np.insert(data_sorted, 0, -np.inf)
+    cdf_array = np.insert(cdf_array, 0, 0)
+    
+    # hist_line, = axis.plot(bin_array, data_hist, drawstyle='steps',
+    #                         color=c_dark)
+
+    # axis.fill_between(bin_array, data_hist, label=lab,
+    #                   color=c_light, step='pre')
+
+    a0 = axis.twinx()
+
+    a0.set_ylabel('CDF', color='k')
+    a0.tick_params(axis='y', labelcolor='dimgrey')
+    
+    cdf_line, = a0.plot(data_sorted, cdf_array,
+                        drawstyle='steps',
+                        color='k',
+                        # path_effects=style,
+    )
+    
+    # axis.grid(True)
+    # axis.set_ylabel('Counts Events {}'.format(lab), color='k')
+    # axis.tick_params(axis='y', labelcolor='k')
+    # axis.set_xlabel('Energy [ADU]')
+    
+    # axis.legend(loc=2)
+    
+    # axis.set_yscale('log')
+    axis.set_xlim(bin_edges[0], bin_edges[-1])
+    
+    a0.set_ylim(0, 1.1)
+    
+    return a0, bin_array, data_hist, cdf_array
+
 
 
 def plot_ion_vs_ion(ana, energy_array, **kwargs):
